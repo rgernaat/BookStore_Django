@@ -1,0 +1,3 @@
+Please active your account at {{ site.name }}.
+
+ 

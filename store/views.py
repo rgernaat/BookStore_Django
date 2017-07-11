@@ -1,0 +1,14 @@
+from django.shortcuts import render
+from .models import book
+
+
+def index(request):
+    return render(request, 'template.html')
+
+def store(request):
+    count = book.objects.all().count()
+    context = {'count': count,}
+    request.session['location'] = "unknown"
+    if request.user.is_authenticated():
+        request.session['location'] = "Earth"
+    return render(request, 'base.html', context)

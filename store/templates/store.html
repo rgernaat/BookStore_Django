@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>{{ page|title }}</title>
+    </head>
+    {% block content %}
+    <body>
+        {% if request.user.is_authenticated %}
+        <h4>Welcome, {% if request.user.first_name %}
+                        {{ request.user.first_name }} 
+                     {%else%}
+                        {{ request.user.username }}
+                     {%endif%}
+                     <p>
+                         <a href="{% url 'auth_logout' %}" >logout</a>
+        </h4>
+        {% else %}
+        Welcome random person, how about <a href="{% url 'auth_login' %}">logging in?</a>
+        {% endif %}
+        <p>
+        There are {{count}} book(s) in stock at your location : {{ request.session.location }}
+    </body>
+    {% endblock %}
+</html>
